@@ -8,7 +8,7 @@ permissions:
 
 env:
   RESOURCE_GROUP_FULL_NAME: ${{ format('{0}-{1}', secrets.RESOURCE_GROUP_NAME, secrets.ENVIRONMENT_NAME) }}
-  STORAGE_ACCOUNT_FULL_NAME: ${{ format('{0}{1}{2}', secrets.STORAGE_ACCOUNT_NAME, secrets.ENVIRONMENT_NAME, github.sha) }}
+  STORAGE_ACCOUNT_FULL_NAME: ${{ format('{0}{1}{2}', secrets.STORAGE_ACCOUNT_NAME, secrets.ENVIRONMENT_NAME, github.run_id) }}
   BLOB_CONTAINER_NAME: ${{ format('{0}-{1}', secrets.TERRAFORM_STATE_BLOB_CONTAINER_NAME, secrets.ENVIRONMENT_NAME) }}
       
 jobs: 
