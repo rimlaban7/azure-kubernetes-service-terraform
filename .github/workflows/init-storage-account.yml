@@ -5,11 +5,6 @@ on:
 permissions:
       id-token: write
       contents: read
-
-env:
-  RESOURCE_GROUP_FULL_NAME: ${{ format('{0}-{1}', secrets.RESOURCE_GROUP_NAME, secrets.ENVIRONMENT_NAME) }}
-  STORAGE_ACCOUNT_FULL_NAME: ${{ format('{0}{1}8675309', secrets.STORAGE_ACCOUNT_NAME, secrets.ENVIRONMENT_NAME) }}
-  BLOB_CONTAINER_NAME: ${{ format('{0}-{1}', secrets.TERRAFORM_STATE_BLOB_CONTAINER_NAME, secrets.ENVIRONMENT_NAME) }}
       
 jobs: 
   initialize-state-storage:
@@ -36,6 +31,6 @@ jobs:
           with:
             azcliversion: 2.30.0
             inlineScript: |
-              az group create --name ${{ env.RESOURCE_GROUP_FULL_NAME }} --location ${{ secrets.REGION }}
-              az storage account create --resource-group ${{ env.RESOURCE_GROUP_FULL_NAME }} --name ${{ env.STORAGE_ACCOUNT_FULL_NAME }} --sku ${{ secrets.STORAGE_ACCOUNT_SKU }} --encryption-services blob
-              az storage container create --name ${{ env.BLOB_CONTAINER_NAME }} --account-name ${{ env.STORAGE_ACCOUNT_FULL_NAME }}
+              az group create --name ${{ secrets.RESOURCE_GROUP_NAME }} --location ${{ secrets.REGION }}
+              az storage account create --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} --name ${{ secrets.STORAGE_ACCOUNT_NAME }} --sku ${{ secrets.STORAGE_ACCOUNT_SKU }} --encryption-services blob
+              az storage container create --name ${{ secrets.BLOB_CONTAINER_NAME }} --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }}
