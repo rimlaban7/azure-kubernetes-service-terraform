@@ -1,0 +1,20 @@
+name: Initialize Azure Storage Account for Backend Terraform State Storage
+on: workflow_dispatch
+
+permissions:
+      id-token: write
+      contents: read
+      
+jobs: 
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Run init-storage-account.sh
+          run: sh ./github/scripts/init-storage-account.sh
+          env:
+            REGION: ${{ secrets.REGION }}
+            ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
+            RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
+            STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
+            TERRAFORM_STATE_BLOB_CONTAINER_NAME: ${{ secrets.TERRAFORM_STATE_BLOB_CONTAINER_NAME }}
+            STORAGE_ACCOUNT_SKU: ${{ secrets.STORAGE_ACCOUNT_SKU }}
