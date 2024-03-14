@@ -1,9 +1,13 @@
 name: Initialize Backend Terraform State Storage
-on: workflow_dispatch
+on: 
+  workflow_dispatch
 
 permissions:
       id-token: write
       contents: read
+
+env:
+  RESOURCE_GROUP_FULL_NAME: ${{ format('{0}-{1}', secrets.RESOURCE_GROUP_NAME, secrets.ENVIRONMENT_NAME) }}
       
 jobs: 
   initialize-state-storage:
@@ -23,8 +27,7 @@ jobs:
           with:
             azcliversion: 2.30.0
             inlineScript: |
-              chmod +x ./.github/scripts/init-storage-account.sh
-              ./.github/scripts/init-storage-account.sh
+              az group create --name ${{ env.RESOURCE_GROUP_FULL_NAME }} --location ${{ secrets.REGION }}
 
         #- name: Run init-storage-account.sh
         #  run: bash ./.github/scripts/init-storage-account.sh
