@@ -9,7 +9,7 @@ This repo contains all necessary code to stand up an AKS cluster using Terraform
     - AZURE_SUBSCRIPTION_ID
     - AZURE_TENANT_ID
 2. Initialize Terraform State storage in Azure Storage Account using Azure CLI bash script and workflow.
-- Make sure the following repository secrets are defined for your actions:
+- Make sure the following repository secrets are configured:
     - REGION
     - ENVIRONMENT_NAME
     - RESOURCE_GROUP_NAME
