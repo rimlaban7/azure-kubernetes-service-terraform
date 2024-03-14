@@ -4,11 +4,11 @@ This repo contains all necessary code to stand up an AKS cluster using Terraform
 ## Steps
 
 1. Make sure a service principal is configured and has appropriate permissions for your Azure environment. This repo uses OpenID Connect (OIDC) to avoid storing and managing client secrets (passwords).
-- Make sure the following repository secretes are configured:
+- Make sure the following repository secrets are configured:
     - AZURE_CLIENT_ID
     - AZURE_SUBSCRIPTION_ID
     - AZURE_TENANT_ID
-2. Initialize Terraform State storage in Azure Storage Account using Azure CLI bash script and workflow.
+2. Initialize Terraform State storage in Azure Storage Account using init-state-storage.yml workflow.
 - Make sure the following repository secrets are configured:
     - REGION
     - ENVIRONMENT_NAME
