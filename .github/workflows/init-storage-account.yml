@@ -17,12 +17,21 @@ jobs:
     steps:
         - uses: actions/checkout@v4
 
-        - name: Run init-storage-account.sh
-          run: bash ./.github/scripts/init-storage-account.sh
-          env:
-            REGION: ${{ secrets.REGION }}
-            ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
-            RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
-            STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
-            TERRAFORM_STATE_BLOB_CONTAINER_NAME: ${{ secrets.TERRAFORM_STATE_BLOB_CONTAINER_NAME }}
-            STORAGE_ACCOUNT_SKU: ${{ secrets.STORAGE_ACCOUNT_SKU }}
+        # Execute Azure CLI script of a specific CLI version via file present in your repository.
+        - name: Azure CLI script file
+          uses: azure/cli@v2
+          with:
+            azcliversion: 2.30.0
+            inlineScript: |
+              chmod +x ./.github/scripts/init-storage-account.sh
+              ./.github/scripts/init-storage-account.sh
+
+        #- name: Run init-storage-account.sh
+        #  run: bash ./.github/scripts/init-storage-account.sh
+        #  env:
+        #    REGION: ${{ secrets.REGION }}
+        #    ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
+        #    RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
+        #    STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
+        #    TERRAFORM_STATE_BLOB_CONTAINER_NAME: ${{ secrets.TERRAFORM_STATE_BLOB_CONTAINER_NAME }}
+        #    STORAGE_ACCOUNT_SKU: ${{ secrets.STORAGE_ACCOUNT_SKU }}
