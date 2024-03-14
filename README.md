@@ -8,7 +8,7 @@ This repo contains all necessary code to stand up an AKS cluster using Terraform
     - AZURE_TENANT_ID
     - AZURE_SUBSCRIPTION_ID
     - AZURE_CLIENT_ID
-2. Initialize Terraform State storage in Azure Storage Account using `init-remote-backend.yml workflow.
+2. Initialize Terraform remote state storage in Azure Storage Account using `init-remote-backend.yml workflow.
 - Make sure the following repository secrets are configured:
     - REGION
     - ENVIRONMENT_NAME
