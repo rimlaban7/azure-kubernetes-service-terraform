@@ -1,6 +1,5 @@
 name: Initialize Backend Terraform State Storage
-on: 
-  workflow_dispatch
+on: workflow_dispatch
 
 permissions:
       id-token: write
