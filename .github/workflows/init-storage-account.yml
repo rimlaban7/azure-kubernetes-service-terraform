@@ -1,9 +1,13 @@
 name: Initialize Backend Terraform State Storage
-on: workflow_dispatch
+on: 
+  workflow_dispatch
 
 permissions:
       id-token: write
       contents: read
+
+env:
+  RESOURCE_GROUP_FULL_NAME: ${{ format('{0}-{1}', secrets.RESOURCE_GROUP_NAME, secrets.ENVIRONMENT_NAME) }}
       
 jobs: 
   initialize-state-storage:
@@ -17,12 +21,27 @@ jobs:
     steps:
         - uses: actions/checkout@v4
 
-        - name: Run init-storage-account.sh
-          run: ./.github/scripts/init-storage-account.sh
-          env:
-            REGION: ${{ secrets.REGION }}
-            ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
-            RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
-            STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
-            TERRAFORM_STATE_BLOB_CONTAINER_NAME: ${{ secrets.TERRAFORM_STATE_BLOB_CONTAINER_NAME }}
-            STORAGE_ACCOUNT_SKU: ${{ secrets.STORAGE_ACCOUNT_SKU }}
+        - name: Azure login
+          uses: azure/login@v2
+          with:
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+        # Execute Azure CLI script of a specific CLI version via file present in your repository.
+        - name: Azure CLI script file
+          uses: azure/cli@v2
+          with:
+            azcliversion: 2.30.0
+            inlineScript: |
+              az group create --name ${{ env.RESOURCE_GROUP_FULL_NAME }} --location ${{ secrets.REGION }}
+
+        #- name: Run init-storage-account.sh
+        #  run: bash ./.github/scripts/init-storage-account.sh
+        #  env:
+        #    REGION: ${{ secrets.REGION }}
+        #    ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
+        #    RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
+        #    STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
+        #    TERRAFORM_STATE_BLOB_CONTAINER_NAME: ${{ secrets.TERRAFORM_STATE_BLOB_CONTAINER_NAME }}
+        #    STORAGE_ACCOUNT_SKU: ${{ secrets.STORAGE_ACCOUNT_SKU }}
