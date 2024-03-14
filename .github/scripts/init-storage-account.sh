@@ -1,25 +1,26 @@
 #!/bin/bash
 
-RESOURCE_GROUP_NAME="${{ env.RESOURCE_GROUP_NAME}}-${{ env.ENVIRONMENT_NAME }}"
-STORAGE_ACCOUNT_NAME="${{ env.STORAGE_ACCOUNT_NAME }}${{ env.ENVIRONMENT_NAME }}$RANDOM"
-CONTAINER_NAME="${{ env.TERRAFORM_STATE_BLOB_CONTAINER_NAME }}-${{ env.ENVIRONMENT_NAME }}"
+RESOURCE_GROUP_FULL_NAME="$RESOURCE_GROUP_NAME-$ENVIRONMENT_NAME"
+STORAGE_ACCOUNT_FULL_NAME="$STORAGE_ACCOUNT_NAME$ENVIRONMENT_NAME$RANDOM"
+CONTAINER_NAME="$TERRAFORM_STATE_BLOB_CONTAINER_NAME-$ENVIRONMENT_NAME"
 
-echo "${{ var.REGION }}"
-echo "${{ var.ENVIRONMENT_NAME }}"
-echo "${{ var.RESOURCE_GROUP_NAME }}"
-echo "${{ var.STORAGE_ACCOUNT_NAME }}"
-echo "${{ var.TERRAFORM_STATE_BLOB_CONTAINER_NAME }}"
-echo "${{ var.STORAGE_ACCOUNT_SKU }}"
-echo "$RANDOM"
+echo "$REGION"
+echo "$ENVIRONMENT_NAME"
 echo "$RESOURCE_GROUP_NAME"
 echo "$STORAGE_ACCOUNT_NAME"
+echo "$TERRAFORM_STATE_BLOB_CONTAINER_NAME"
+echo "$STORAGE_ACCOUNT_SKU"
+
+echo "$RANDOM"
+echo "$RESOURCE_GROUP_FULL_NAME"
+echo "$STORAGE_ACCOUNT_FULL_NAME"
 echo "$CONTAINER_NAME"
 
 # Create resource group
-#az group create --name $RESOURCE_GROUP_NAME --location {{ env.REGION }}
+#az group create --name $RESOURCE_GROUP_FULL_NAME --location {{ secret.REGION }}
 
 # Create storage account
-#az storage account create --resource-group $RESOURCE_GROUP_NAME --name $STORAGE_ACCOUNT_NAME --sku {{ env.STORAGE_ACCOUNT_SKU }} --encryption-services blob
+#az storage account create --resource-group $RESOURCE_GROUP_FULL_NAME --name $STORAGE_ACCOUNT_FULL_NAME --sku $STORAGE_ACCOUNT_SKU --encryption-services blob
 
 # Create blob container
 #az storage container create --name $CONTAINER_NAME --account-name $STORAGE_ACCOUNT_NAME
