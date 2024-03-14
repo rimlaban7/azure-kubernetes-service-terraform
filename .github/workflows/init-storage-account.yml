@@ -1,4 +1,4 @@
-name: Initialize Azure Storage Account for Backend Terraform State Storage
+name: Initialize Backend Terraform State Storage
 on: workflow_dispatch
 
 permissions:
@@ -6,9 +6,17 @@ permissions:
       contents: read
       
 jobs: 
-  build-and-deploy:
+  initialize-state-storage:
     runs-on: ubuntu-latest
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+        run:
+          shell: bash
+
     steps:
+        - uses: actions/checkout@v4
+        
         - name: Run init-storage-account.sh
           run: sh ./github/scripts/init-storage-account.sh
           env:
