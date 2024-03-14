@@ -16,7 +16,7 @@ echo "$STORAGE_ACCOUNT_FULL_NAME"
 echo "$CONTAINER_NAME"
 
 # Create resource group
-az group create --name $RESOURCE_GROUP_FULL_NAME --location {{ secret.REGION }}
+az group create --name $RESOURCE_GROUP_FULL_NAME --location $REGION
 
 # Create storage account
 az storage account create --resource-group $RESOURCE_GROUP_FULL_NAME --name $STORAGE_ACCOUNT_FULL_NAME --sku $STORAGE_ACCOUNT_SKU --encryption-services blob
