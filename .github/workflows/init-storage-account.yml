@@ -16,9 +16,9 @@ jobs:
 
     steps:
         - uses: actions/checkout@v4
-        
+
         - name: Run init-storage-account.sh
-          run: sh ./github/scripts/init-storage-account.sh
+          run: bash ./.github/scripts/init-storage-account.sh
           env:
             REGION: ${{ secrets.REGION }}
             ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
