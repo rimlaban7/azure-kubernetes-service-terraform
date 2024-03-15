@@ -1,3 +1,9 @@
+variable "environment" {
+  type = string
+  sensitive = true
+  default = "prod"
+}
+
 variable "resource_group_name" {
     type = string
     sensitive = true
@@ -14,12 +20,6 @@ variable "storage_account_prefix" {
     type = string
     sensitive = true
     default = "terracloudgithub"
-}
-
-variable "environment" {
-  type = string
-  sensitive = true
-  default = "prod"
 }
 
 variable "storage_account_import_id" {

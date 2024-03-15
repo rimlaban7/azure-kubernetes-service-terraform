@@ -1,6 +1,6 @@
-variable "name_prefix" {
+variable "storage_account_prefix" {
     type = string
-    sensitive = true  
+    sensitive = true
 }
 
 variable "resource_group_name" {
@@ -26,11 +26,6 @@ variable "account_replication_type" {
 }
 
 variable "environment" {
-    type = string
-    sensitive = true
-}
-
-variable "storage_account_prefix" {
     type = string
     sensitive = true
 }
