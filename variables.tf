@@ -26,3 +26,8 @@ variable "storage_account_import_id" {
   type = string
   sensitive = true
 }
+
+variable "resource_group_import_id" {
+  type = string
+  sensitive = true
+}

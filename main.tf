@@ -29,3 +29,11 @@ module "resource_group" {
   location = var.location
 }
 
+module "storage_account" {
+  source = "./modules/storage_account"
+
+  resource_group_name = var.resource_group_name
+  location = var.location
+  storage_account_prefix = var.storage_account_prefix
+  environment = var.environment
+}
