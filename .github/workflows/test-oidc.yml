@@ -1,5 +1,6 @@
 name: Run Azure Login with OpenID Connect
-on: workflow_dispatch
+on: 
+  workflow_dispatch
 
 permissions:
       id-token: write
@@ -8,8 +9,6 @@ permissions:
 jobs: 
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref_name }}
     steps:
     - name: 'Az CLI login'
       uses: azure/login@v2
