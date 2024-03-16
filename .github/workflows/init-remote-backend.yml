@@ -9,11 +9,17 @@ permissions:
 jobs: 
   initialize-state-storage:
     runs-on: ubuntu-latest
+    environment: prod
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
         run:
           shell: bash
+
+    env:
+      FULL_RESOURCE_GROUP_NAME: ${{ format('{0}-{1}', secrets.RESOURCE_GROUP_NAME, secrets.ENVIRONMENT) }}
+      FULL_STORAGE_ACCOUNT_NAME: ${{ format('{0}{1}', secrets.STORAGE_ACCOUNT_PREFIX, secrets.ENVIRONMENT) }}
+      STORAGE_ACCOUNT_SKU: ${{ format('{0}_{1}', secrets.ACCOUNT_TIER, secrets.ACCOUNT_REPLICATION_TYPE) }}
 
     steps:
         - uses: actions/checkout@v4
@@ -31,6 +37,6 @@ jobs:
           with:
             azcliversion: 2.30.0
             inlineScript: |
-              az group create --name ${{ secrets.RESOURCE_GROUP_NAME }} --location ${{ secrets.REGION }} 
-              az storage account create --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} --name ${{ secrets.STORAGE_ACCOUNT_NAME }} --sku ${{ secrets.STORAGE_ACCOUNT_SKU }} --encryption-services blob
-              az storage container create --name ${{ secrets.BLOB_CONTAINER_NAME }} --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }}
+              az group create --name $FULL_RESOURCE_GROUP_NAME --location ${{ secrets.AZ_CLI_LOCATION }} 
+              az storage account create --resource-group $FULL_RESOURCE_GROUP_NAME --name $FULL_STORAGE_ACCOUNT_NAME --sku $STORAGE_ACCOUNT_SKU --encryption-services blob
+              az storage container create --name ${{ secrets.BLOB_CONTAINER_NAME }} --account-name $FULL_STORAGE_ACCOUNT_NAME
