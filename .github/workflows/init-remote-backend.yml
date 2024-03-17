@@ -22,7 +22,7 @@ jobs:
 
     env:
       FULL_RESOURCE_GROUP_NAME: ${{ format('{0}-{1}', secrets.RESOURCE_GROUP_NAME, inputs.current_environment) }}
-      FULL_STORAGE_ACCOUNT_NAME: ${{ format('{0}{1}', secrets.STORAGE_ACCOUNT_PREFIX, inputs.current_environment) }}
+      FULL_STORAGE_ACCOUNT_NAME: ${{ format('{0}{1}', secrets.STORAGE_ACCOUNT_NAME, inputs.current_environment) }}
       STORAGE_ACCOUNT_SKU: ${{ format('{0}_{1}', secrets.ACCOUNT_TIER, secrets.ACCOUNT_REPLICATION_TYPE) }}
 
     steps:
