@@ -38,5 +38,5 @@ jobs:
             azcliversion: 2.30.0
             inlineScript: |
               az group create --name $FULL_RESOURCE_GROUP_NAME --location ${{ secrets.AZ_CLI_LOCATION }} 
-              az storage account create --resource-group $FULL_RESOURCE_GROUP_NAME --name $FULL_STORAGE_ACCOUNT_NAME --sku $STORAGE_ACCOUNT_SKU --encryption-services blob
+              az storage account create --resource-group $FULL_RESOURCE_GROUP_NAME --name $FULL_STORAGE_ACCOUNT_NAME --sku $STORAGE_ACCOUNT_SKU --encryption-services blob --min-tls-version TLS1_2
               az storage container create --name ${{ secrets.BLOB_CONTAINER_NAME }} --account-name $FULL_STORAGE_ACCOUNT_NAME
