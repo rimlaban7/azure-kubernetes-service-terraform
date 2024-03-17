@@ -32,7 +32,7 @@ We'll need to create an Entra application and service principal that has the app
 
 ### GitHub Actions Environment Secrets
 
-The GitHub Actions and Terraform code we will use for this project require an environment as well as environment secrets to be configured. For step-by-step instructions on how to create an environment, see [Creating an Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#creating-an-environment). We'll need to call this environment the same as in the above OIDC configuration. Finally, add the below repository secrets.
+The GitHub Actions and Terraform code we will use for this project require an environment as well as environment secrets to be configured. For step-by-step instructions on how to create an environment, see [Creating an Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#creating-an-environment). For this project we'll use a Trunk-Based branching strategy.  For more inforomation, see [Branching Strategies](https://www.theroadtocloud.com/blog/branching-strategies/). Map this environment to a branch We'll need to call this environment the same as in the above OIDC configuration. Finally, add the below repository secrets.
 
 | Variable | Description |
 |-|-|
