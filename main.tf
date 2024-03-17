@@ -7,9 +7,6 @@ terraform {
     }
   }
   backend "azurerm" {
-    storage_account_name = "teroidc"
-    container_name       = "tfstate"
-    key                  = "dev.teroidc.tfstate"
   }
 }
 
