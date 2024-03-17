@@ -7,8 +7,6 @@ terraform {
     }
   }
   backend "azurerm" {
-    // resource_group_name  = "rg-aks-prod"
-    storage_account_name = "stakstfstateprod"
     container_name       = "tfstate"
     key                  = "prod.teroidc.tfstate"
   }
