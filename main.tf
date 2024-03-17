@@ -15,6 +15,7 @@ provider "azurerm" {
   skip_provider_registration = true
 }
 
+/*
 locals {
     full_resource_group_name = format("%s-%s", var.resource_group_name, var.environment)
     full_storage_account_name = format("%s%s", var.storage_account_name, var.environment)
@@ -36,3 +37,4 @@ module "storage_account" {
   account_replication_type = var.account_replication_type
   account_tier = var.account_tier
 }
+*/
