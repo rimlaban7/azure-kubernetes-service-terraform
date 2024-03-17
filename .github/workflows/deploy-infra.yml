@@ -25,7 +25,7 @@ jobs:
       FULL_RESOURCE_GROUP_NAME: ${{ format('resource_group_name={0}-{1}', secrets.RESOURCE_GROUP_NAME, inputs.current_environment) }}
       FULL_STORAGE_ACCOUNT_NAME: ${{ format('storage_account_name={0}{1}', secrets.STORAGE_ACCOUNT_PREFIX, inputs.current_environment) }}
       BLOB_CONTAINER_NAME: ${{ format('container_name={0}', secrets.BLOB_CONTAINER_NAME) }}
-      #KEY: ${{ format('key={0}', secrets.STORAGE_ACCOUNT_KEY) }}
+      KEY: ${{ format('key={0}.terraform.{1}', inputs.current_environment, secrets.BLOB_CONTAINER_NAME) }}
       USE_OIDC: "use_oidc=true"
       SUBSCRIPTION_ID: ${{ format('subscription_id={0}', secrets.AZURE_SUBSCRIPTION_ID) }}
       TENANT_ID: ${{ format('tenant_id={0},', secrets.AZURE_TENANT_ID) }}
@@ -49,6 +49,7 @@ jobs:
         echo $FULL_RESOURCE_GROUP_NAME \
         $FULL_STORAGE_ACCOUNT_NAME \
         $BLOB_CONTAINER_NAME \
+        $KEY \
         $USE_OIDC \
         $SUBSCRIPTION_ID \
         $TENANT_ID \

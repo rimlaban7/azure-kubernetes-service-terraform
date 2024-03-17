@@ -8,7 +8,7 @@ variable "resource_group_name" {
   sensitive = true
 }
 
-variable "storage_account_prefix" {
+variable "storage_account_name" {
     type = string
     sensitive = true
 }

@@ -13,7 +13,17 @@ variable "location" {
   sensitive = true
 }
 
-variable "storage_account_prefix" {
+variable "storage_account_name" {
+    type = string
+    sensitive = true
+}
+
+variable "account_tier" {
+    type = string
+    sensitive = true
+}
+
+variable "account_replication_type" {
     type = string
     sensitive = true
 }
