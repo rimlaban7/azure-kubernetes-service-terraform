@@ -41,5 +41,5 @@ jobs:
             inlineScript: |
               az group create --name $FULL_RESOURCE_GROUP_NAME --location ${{ secrets.AZ_CLI_LOCATION }} 
               az storage account create --resource-group $FULL_RESOURCE_GROUP_NAME --name $FULL_STORAGE_ACCOUNT_NAME --sku $STORAGE_ACCOUNT_SKU --encryption-services blob --min-tls-version TLS1_2
-              KEY=$(az storage account keys list -g $RG_NAME -n $SA_NAME --query "[0].value" -o tsv)
+              KEY=$(az storage account keys list -g $FULL_RESOURCE_GROUP_NAME -n $FULL_STORAGE_ACCOUNT_NAME --query "[0].value" -o tsv)
               az storage container create --name ${{ secrets.BLOB_CONTAINER_NAME }} --account-name $FULL_STORAGE_ACCOUNT_NAME --account-key $KEY
