@@ -6,9 +6,7 @@ terraform {
       version = "=3.92.0"
     }
   }
-  backend "azurerm" {
-    key                  = "prod.teroidc.tfstate"
-  }
+  backend "azurerm" {}
 }
 
 provider "azurerm" {
