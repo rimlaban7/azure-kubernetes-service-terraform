@@ -36,4 +36,6 @@ module "storage_account" {
   location = var.location
   storage_account_prefix = var.storage_account_prefix
   environment = var.environment
+  account_replication_type = var.account_replication_type
+  account_tier = var.account_tier
 }
