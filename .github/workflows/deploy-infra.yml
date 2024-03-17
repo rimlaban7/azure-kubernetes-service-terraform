@@ -24,7 +24,7 @@ jobs:
     env:
       FULL_RESOURCE_GROUP_NAME: ${{ format('resource_group_name={0}-{1}', secrets.RESOURCE_GROUP_NAME, inputs.current_environment) }}
       FULL_STORAGE_ACCOUNT_NAME: ${{ format('storage_account_name={0}{1}', secrets.STORAGE_ACCOUNT_PREFIX, inputs.current_environment) }}
-      BLOB_CONTAINER_NAME: ${{ format('storage_account_name={0}', secrets.BLOB_CONTAINER_NAME) }}
+      BLOB_CONTAINER_NAME: ${{ format('container_name={0}', secrets.BLOB_CONTAINER_NAME) }}
       #KEY: ${{ format('key={0}', secrets.STORAGE_ACCOUNT_KEY) }}
       USE_OIDC: "use_oidc=true"
       SUBSCRIPTION_ID: ${{ format('subscription_id={0}', secrets.AZURE_SUBSCRIPTION_ID) }}
