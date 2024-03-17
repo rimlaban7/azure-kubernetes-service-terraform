@@ -46,16 +46,6 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
-    - name: Test variables
-      run: | 
-        echo $FULL_RESOURCE_GROUP_NAME \
-        $FULL_STORAGE_ACCOUNT_NAME \
-        $BLOB_CONTAINER_NAME \
-        $KEY \
-        $USE_OIDC \
-        $SUBSCRIPTION_ID \
-        $TENANT_ID \
-
     - name: Terraform Init
       id: init
       run: |
