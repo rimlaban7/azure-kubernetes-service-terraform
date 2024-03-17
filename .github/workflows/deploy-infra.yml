@@ -21,10 +21,10 @@ jobs:
         run:
           shell: bash
     
-    #env:
+    env:
       #FULL_RESOURCE_GROUP_NAME: ${{ format('{0}-{1}', secrets.RESOURCE_GROUP_NAME, inputs.current_environment) }}
       #FULL_STORAGE_ACCOUNT_NAME: ${{ format('{0}{1}', secrets.STORAGE_ACCOUNT_NAME, inputs.current_environment) }}
-      #CONFIG_FULL_RESOURCE_GROUP_NAME: ${{ format('resource_group_name={0}-{1}', secrets.RESOURCE_GROUP_NAME, inputs.current_environment) }}
+      CONFIG_FULL_RESOURCE_GROUP_NAME: ${{ format('resource_group_name={0}-{1}', secrets.RESOURCE_GROUP_NAME, inputs.current_environment) }}
       #CONFIG_FULL_STORAGE_ACCOUNT_NAME: ${{ format('storage_account_name={0}{1}', secrets.STORAGE_ACCOUNT_NAME, inputs.current_environment) }}
       #CONFIG_BLOB_CONTAINER_NAME: ${{ format('container_name={0}', secrets.BLOB_CONTAINER_NAME) }}
       #CONFIG_KEY: ${{ format('key={0}.terraform.{1}', inputs.current_environment, secrets.BLOB_CONTAINER_NAME) }}
@@ -52,7 +52,9 @@ jobs:
     - name: Terraform Init
       id: init
       run: |
-        terraform init
+        terraform init \
+        -backend-config=$CONFIG_FULL_RESOURCE_GROUP_NAME }} 
+
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
