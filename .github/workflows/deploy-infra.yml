@@ -53,7 +53,7 @@ jobs:
       id: init
       run: |
         terraform init \
-        -backend-config=$CONFIG_FULL_RESOURCE_GROUP_NAME }} 
+        -backend-config $CONFIG_FULL_RESOURCE_GROUP_NAME 
 
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
