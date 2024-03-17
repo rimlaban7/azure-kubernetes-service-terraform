@@ -29,9 +29,10 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v2
+    - name: Checkout Repo
+      uses: actions/checkout@v2
 
-    - name: 'Az CLI login'
+    - name: Az CLI Login
       uses: azure/login@v2
       with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
