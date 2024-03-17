@@ -50,13 +50,14 @@ jobs:
       id: init
       run: |
         terraform init \
-        -backend-config $FULL_RESOURCE_GROUP_NAME \
-        -backend-config $FULL_STORAGE_ACCOUNT_NAME \
-        -backend-config $BLOB_CONTAINER_NAME \
-        -backend-config $KEY \
-        -backend-config $USE_OIDC \
-        -backend-config $SUBSCRIPTION_ID \
-        -backend-config $TENANT_ID \
+        -backend-config=$FULL_RESOURCE_GROUP_NAME \
+        -backend-config=$FULL_STORAGE_ACCOUNT_NAME \
+        -backend-config=$BLOB_CONTAINER_NAME \
+        -backend-config=$KEY \
+        -backend-config=$USE_OIDC \
+        -backend-config=$SUBSCRIPTION_ID \
+        -backend-config=$TENANT_ID \
+        -input=false
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       #  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
