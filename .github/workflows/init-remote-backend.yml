@@ -1,6 +1,10 @@
 name: Initialize Backend Terraform State Storage
 on: 
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      current_environment:
+        type: string
+        default: "prod"
 
 permissions:
       id-token: write
@@ -9,7 +13,7 @@ permissions:
 jobs: 
   initialize-state-storage:
     runs-on: ubuntu-latest
-    environment: prod
+    environment: ${{ inputs.current_environment }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -17,8 +21,8 @@ jobs:
           shell: bash
 
     env:
-      FULL_RESOURCE_GROUP_NAME: ${{ format('{0}-{1}', secrets.RESOURCE_GROUP_NAME, secrets.ENVIRONMENT) }}
-      FULL_STORAGE_ACCOUNT_NAME: ${{ format('{0}{1}', secrets.STORAGE_ACCOUNT_PREFIX, secrets.ENVIRONMENT) }}
+      FULL_RESOURCE_GROUP_NAME: ${{ format('{0}-{1}', secrets.RESOURCE_GROUP_NAME, inputs.current_environment) }}
+      FULL_STORAGE_ACCOUNT_NAME: ${{ format('{0}{1}', secrets.STORAGE_ACCOUNT_PREFIX, inputs.current_environment) }}
       STORAGE_ACCOUNT_SKU: ${{ format('{0}_{1}', secrets.ACCOUNT_TIER, secrets.ACCOUNT_REPLICATION_TYPE) }}
 
     steps:

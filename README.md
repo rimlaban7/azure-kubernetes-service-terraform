@@ -34,7 +34,7 @@ We'll need to create an Entra application and service principal that has the app
 
 The GitHub Actions and Terraform code we will use for this project require an environment as well as environment secrets to be configured. For step-by-step instructions on how to create an environment, see [Creating an Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#creating-an-environment). For this project we'll use a Trunk-Based branching strategy.  For more inforomation, see [Branching Strategies](https://www.theroadtocloud.com/blog/branching-strategies/). Map this environment to a branch. We'll need to call this environment the same as in the above OIDC configuration. Finally, add the below repository secrets.
 
-| Variable | Description |
+| Secret | Description |
 |-|-|
 | AZURE_TENANT_ID | Entra Tenant ID |
 | AZURE_SUBSCRIPTION_ID | Subscription ID for Azure |
@@ -43,7 +43,6 @@ The GitHub Actions and Terraform code we will use for this project require an en
 | ACCOUNT_TIER | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
 | TF_LOCATION | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
 | BLOB_CONTAINER_NAME | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
-| ENVIRONMENT | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
 | RESOURCE_GROUP_NAME | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
 | STORAGE_ACCOUNT_PREFIX | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
 | AZ_CLI_LOCATION | Similar to `TF_LOCATION`, but in Azure CLI formatting.  Look up with `az location list` command. |
@@ -53,4 +52,4 @@ Once OIDC is configured in Entra and Azure, and these repository secrets above a
 
 ### Initialize Terraform Remote State Storage
 
-When you execute `terraform init`, you're setting up the providers and linking to any existing state of the infrastructure. For this project, the backend state is kept in an Azure storage account.  You only need to run the `init-remote-backend.yml` GitHub Actions Workflow once, and it will initialize an Azure storage account for Terraform remote state. In the next step, we'll import this into Terraform state, so Terraform can also track it.  It makes much more sense to use declerative syntax with Terraform for further provisioning, instead of Azure CLI's procedural syntax.  This will make management much easier and simpler.  
+When you execute `terraform init`, you're setting up the providers and linking to any existing state of the infrastructure. For this project, the backend state is kept in an Azure storage account.  You only need to run the GitHub Action Workflow `init-remote-backend.yml` once, and it will initialize an Azure storage account for Terraform remote state. Make sure to provide the proper environment name, default is `prod`. In the next step, we'll import this into Terraform state, so Terraform can also track it.  It makes much more sense to use declerative syntax with Terraform for further provisioning, instead of Azure CLI's procedural syntax.  This will make management much easier and simpler.  
