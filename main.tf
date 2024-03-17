@@ -6,15 +6,11 @@ terraform {
       version = "=3.92.0"
     }
   }
-
-  cloud {
-    hostname = "app.terraform.io"
-    organization = "github-azure-terraform"
-
-    workspaces {
-      project = "azure-functions-terraform"
-      name = "azure-function-terraform"
-    }
+  backend "azurerm" {
+    resource_group_name  = "cd-teroidc-shared"
+    storage_account_name = "teroidc"
+    container_name       = "tfstate"
+    key                  = "dev.teroidc.tfstate"
   }
 }
 
@@ -23,9 +19,14 @@ provider "azurerm" {
   skip_provider_registration = true
 }
 
+locals {
+    full_resource_group_name = format("%s-%s", var.resource_group_name, var.environment)
+    full_storage_account_name = format("%s%s", var.storage_account_name, var.environment)
+}
+
 module "resource_group" {
   source   = "./modules/resource_group"
-  resource_group_name = var.resource_group_name
+  resource_group_name = local.full_resource_group_name
   location = var.location
 }
 
@@ -34,7 +35,7 @@ module "storage_account" {
 
   resource_group_name = var.resource_group_name
   location = var.location
-  storage_account_prefix = var.storage_account_prefix
+  storage_account_name = local.full_storage_account_name
   environment = var.environment
   account_replication_type = var.account_replication_type
   account_tier = var.account_tier
