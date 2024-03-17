@@ -47,11 +47,11 @@ jobs:
     - name: Test variables
       run: | 
         echo $FULL_RESOURCE_GROUP_NAME \
-        echo $FULL_STORAGE_ACCOUNT_NAME
-        echo $BLOB_CONTAINER_NAME
-        echo $USE_OIDC
-        echo $SUBSCRIPTION_ID
-        echo $TENANT_ID
+        echo $FULL_STORAGE_ACCOUNT_NAME \
+        echo $BLOB_CONTAINER_NAME \
+        echo $USE_OIDC \
+        echo $SUBSCRIPTION_ID \
+        echo $TENANT_ID \
 
     #- name: Terraform Init
     #  id: init
