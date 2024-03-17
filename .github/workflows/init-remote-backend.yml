@@ -1,4 +1,4 @@
-name: Initialize Backend Terraform State Storage
+name: Initialize Remote Backend
 on: 
   workflow_dispatch:
     inputs:
