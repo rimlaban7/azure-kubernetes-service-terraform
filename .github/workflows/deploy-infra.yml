@@ -27,6 +27,7 @@ env:
           
 jobs: 
   terraform-plan:
+    name: Terraform Plan
     runs-on: ubuntu-latest
     environment: ${{ inputs.current_environment }}
 
@@ -49,6 +50,14 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
+    - name: Setup TFLint
+      uses: terraform-linters/setup-tflint@v1
+    
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: true  
+
     - name: Terraform Init
       id: init
       run: |
@@ -63,6 +72,16 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         ARM_USE_OIDC: true
 
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate
+
+    - name: Init TFLint
+      run: tflint --init
+
+    - name: Run TFLint
+      run: tflint -f compact
+
     - name: Terraform Plan
       id: plan
       run: terraform plan --out=out.tfplan
@@ -72,8 +91,62 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         ARM_USE_OIDC: true
 
+    - name: Create the plan summary
+      uses: actions/github-script@v6
+      if: always()
+      id: summary
+      env:
+        PLAN: '${{ steps.plan.outputs.stdout }}'
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          // 1. Prep the output
+          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+          #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+          <details><summary>Validation Output</summary>
+
+          \`\`\`\n
+          ${{ steps.validate.outputs.stdout }}
+          \`\`\`
+
+          </details>
+
+          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+          
+          <details><summary>Show Plan</summary>
+          
+          \`\`\`\n
+          ${process.env.PLAN}
+          \`\`\`
+          
+          </details>
+          
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`, Workflow: \`${{ github.workflow }}\`*`;
+          
+          // 2. Set the output variable
+          const fs = require('fs');
+          fs.writeFileSync('./summary.md', output);
+          core.setOutput('summary', output);
+      
+    - name: Write the step summary
+      if: always()
+      run: cat summary.md >> $GITHUB_STEP_SUMMARY
+
     - name: Upload the plan
       uses: actions/upload-artifact@v3
       with:
         name: tf-plan
         path: ./out.tfplan
+
+  terraform-apply:
+    name: Terraform Plan
+    if: ${{ inputs.current_environment == 'prod' }}
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.current_environment }}
+
+    defaults:
+      run:
+        shell: bash
+
+
