@@ -29,6 +29,7 @@ jobs:
       TF_VAR_resource_group_name: ${{ secrets.RESOURCE_GROUP_NAME }}
       TF_VAR_environment: ${{ inputs.current_environment }}
       TF_VAR_location: ${{ secrets.TF_LOCATION }}
+      TF_VAR_resource_group_import_id: ${{ secrets.RESOURCE_GROUP_IMPORT_ID }}
 
     steps:
 
