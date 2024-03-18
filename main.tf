@@ -13,10 +13,9 @@ provider "azurerm" {
   features {}
 }
 
-/*
 locals {
     full_resource_group_name = format("%s-%s", var.resource_group_name, var.environment)
-    full_storage_account_name = format("%s%s", var.storage_account_name, var.environment)
+    //full_storage_account_name = format("%s%s", var.storage_account_name, var.environment)
 }
 
 module "resource_group" {
@@ -24,7 +23,7 @@ module "resource_group" {
   resource_group_name = local.full_resource_group_name
   location = var.location
 }
-
+/*
 module "storage_account" {
   source = "./modules/storage_account"
 
