@@ -12,14 +12,14 @@ permissions:
   contents: read
 
 env:
-  CONFIG_FULL_RESOURCE_GROUP_NAME: ${{ format('resource_group_name={0}-{1}', secrets.RESOURCE_GROUP_NAME, inputs.current_environment) }}
-  CONFIG_FULL_STORAGE_ACCOUNT_NAME: ${{ format('storage_account_name={0}{1}', secrets.STORAGE_ACCOUNT_NAME, inputs.current_environment) }}
+  CONFIG_FULL_RESOURCE_GROUP_NAME: format('resource_group_name={0}-{1}', secrets.RESOURCE_GROUP_NAME, inputs.current_environment)
+  CONFIG_FULL_STORAGE_ACCOUNT_NAME: format('storage_account_name={0}{1}', secrets.STORAGE_ACCOUNT_NAME, inputs.current_environment)
   CONFIG_BLOB_CONTAINER_NAME: ${{ format('container_name={0}', secrets.BLOB_CONTAINER_NAME) }}
   CONFIG_KEY: ${{ format('key={0}.terraform.{1}', inputs.current_environment, secrets.BLOB_CONTAINER_NAME) }}
   TF_VAR_resource_group_name: ${{ secrets.RESOURCE_GROUP_NAME }}
   TF_VAR_environment: ${{ inputs.current_environment }}
   TF_VAR_location: ${{ secrets.LOCATION }}
-  TF_VAR_resource_group_import_id: ${{ secrets.RESOURCE_GROUP_IMPORT_ID }}
+  TF_VAR_resource_group_import_id: secrets.RESOURCE_GROUP_IMPORT_ID
   TF_VAR_storage_account_name: ${{ secrets.STORAGE_ACCOUNT_NAME }}
   TF_VAR_account_tier: ${{ secrets.ACCOUNT_TIER }}
   TF_VAR_account_replication_type: ${{ secrets.ACCOUNT_REPLICATION_TYPE }}
@@ -29,7 +29,7 @@ jobs:
   terraform-plan:
     name: Terraform Plan
     runs-on: ubuntu-latest
-    environment: ${{ inputs.current_environment }}
+    #environment: ${{ inputs.current_environment }}
 
     defaults:
         run:
