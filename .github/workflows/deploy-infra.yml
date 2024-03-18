@@ -28,7 +28,7 @@ jobs:
       CONFIG_KEY: ${{ format('key={0}.terraform.{1}', inputs.current_environment, secrets.BLOB_CONTAINER_NAME) }}
       TF_VAR_resource_group_name: ${{ secrets.RESOURCE_GROUP_NAME }}
       TF_VAR_environment: ${{ inputs.current_environment }}
-      TF_VAR_location: ${{ secrets.TF_LOCATION }}
+      TF_VAR_location: ${{ secrets.LOCATION }}
       TF_VAR_resource_group_import_id: ${{ secrets.RESOURCE_GROUP_IMPORT_ID }}
 
     steps:
