@@ -26,7 +26,8 @@ module "resource_group" {
 
 module "storage_account" {
   source = "./modules/storage_account"
-  storage_account_name = local.full_storage_account_name
+  storage_account_name = module.storage_account.name
+  //storage_account_name = local.full_storage_account_name
   resource_group_name = module.resource_group.name
   location = var.location
   environment = var.environment
