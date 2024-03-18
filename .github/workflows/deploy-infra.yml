@@ -50,9 +50,17 @@ jobs:
         -backend-config $CONFIG_FULL_STORAGE_ACCOUNT_NAME \
         -backend-config $CONFIG_BLOB_CONTAINER_NAME \
         -backend-config $CONFIG_KEY
-
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_USE_OIDC: true
+
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         ARM_USE_OIDC: true
