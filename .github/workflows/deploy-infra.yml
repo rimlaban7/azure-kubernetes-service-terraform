@@ -33,6 +33,7 @@ jobs:
       TF_VAR_storage_account_name: ${{ secrets.STORAGE_ACCOUNT_NAME }}
       TF_VAR_account_tier: ${{ secrets.ACCOUNT_TIER }}
       TF_VAR_account_replication_type: ${{ secrets.ACCOUNT_REPLICATION_TYPE }}
+      TF_VAR_storage_account_import_id: ${{ secrets.STORAGE_ACCOUNT_IMPORT_ID }}
 
     steps:
 
