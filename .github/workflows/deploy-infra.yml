@@ -26,6 +26,9 @@ jobs:
       CONFIG_FULL_STORAGE_ACCOUNT_NAME: ${{ format('storage_account_name={0}{1}', secrets.STORAGE_ACCOUNT_NAME, inputs.current_environment) }}
       CONFIG_BLOB_CONTAINER_NAME: ${{ format('container_name={0}', secrets.BLOB_CONTAINER_NAME) }}
       CONFIG_KEY: ${{ format('key={0}.terraform.{1}', inputs.current_environment, secrets.BLOB_CONTAINER_NAME) }}
+      TF_VAR_resource_group_name: ${{ secrets.RESOURCE_GROUP_NAME }}
+      TF_VAR_environment: ${{ secrets.ENVIRONMENT }}
+      TF_VAR_location: ${{ secrets.TF_LOCATION }}
 
     steps:
 
