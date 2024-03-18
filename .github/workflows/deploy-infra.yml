@@ -56,10 +56,10 @@ jobs:
       id: init
       run: |
         terraform init \
-        -backend-config $CONFIG_FULL_RESOURCE_GROUP_NAME \
-        -backend-config $CONFIG_FULL_STORAGE_ACCOUNT_NAME \
-        -backend-config $CONFIG_BLOB_CONTAINER_NAME \
-        -backend-config $CONFIG_KEY
+        -backend-config ${{ env.CONFIG_FULL_RESOURCE_GROUP_NAME }} \
+        -backend-config ${{ env.CONFIG_FULL_STORAGE_ACCOUNT_NAME }} \
+        -backend-config ${{ env.CONFIG_BLOB_CONTAINER_NAME }} \
+        -backend-config ${{ env.CONFIG_KEY }}
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
