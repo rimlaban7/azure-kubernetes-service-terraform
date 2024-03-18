@@ -6,4 +6,7 @@ resource "azurerm_storage_account" "storage_account" {
   account_replication_type = var.account_replication_type
   enable_https_traffic_only = true
 
+  tags = {
+    source = "terraform"
+  }
 }
