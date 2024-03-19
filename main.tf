@@ -20,18 +20,31 @@ locals {
     full_storage_account_name = format("%s%s", var.storage_account_name, var.environment)
 }
 
-module "resource_group" {
-  source   = "./modules/resource_group"
-  resource_group_name = local.full_resource_group_name
+resource "azurerm_resource_group" "resource_group" {
+  name     = local.full_resource_group_name
   location = var.location
+
+  tags = {
+    environment = var.environment
+  }
 }
 
-module "storage_account" {
-  source = "./modules/storage_account"
-  storage_account_name = local.full_storage_account_name
-  resource_group_name = module.resource_group.name
-  location = var.location
-  environment = var.environment
+resource "azurerm_storage_account" "storage_account" {
+  name                     = var.storage_account_name
+  resource_group_name      = azurerm_resource_group.resource_group.name
+  location                 = azurerm_resource_group.resource_group.location
+  account_tier             = var.account_tier
   account_replication_type = var.account_replication_type
-  account_tier = var.account_tier
+  enable_https_traffic_only = true
+  allow_nested_items_to_be_public = false
+  cross_tenant_replication_enabled = false
+  min_tls_version = "TLS1_2"
+
+  tags = {
+    environment = var.environment
+  }
+}
+
+module "virtual_network" {
+  source = "./modules/virtual_network"
 }
