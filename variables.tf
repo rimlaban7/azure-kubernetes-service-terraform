@@ -37,3 +37,8 @@ variable "resource_group_import_id" {
   type = string
   sensitive = true
 }
+
+variable "virtual_network_name" {
+  type=string
+  sensitive = true
+}
