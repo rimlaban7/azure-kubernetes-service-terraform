@@ -16,9 +16,9 @@ provider "azurerm" {
 }
 
 locals {
-    full_resource_group_name = format("rg-%s-%s", var.resource_group_name, var.environment)
-    full_storage_account_name = format("st%s%s", var.storage_account_name, var.environment)
-    full_virtual_network_name = format("vnet-%s-%s", var.virtual_network_name, var.environment)
+    full_resource_group_name = format("%s-%s-%s", "rg", var.resource_group_name, var.environment)
+    full_storage_account_name = format("$s%s%s", "st", var.storage_account_name, var.environment)
+    full_virtual_network_name = format("$s-%s-%s", "vnet", var.virtual_network_name, var.environment)
 }
 
 resource "azurerm_resource_group" "resource_group" {
