@@ -1,20 +1,3 @@
-terraform {
-
-  required_version = ">=1.7.5"
-
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=3.92.0"
-    }
-  }
-  backend "azurerm" {}
-}
-
-provider "azurerm" {
-  features {}
-}
-
 locals {
     full_resource_group_name = format("rg-%s-%s", var.resource_group_name, var.environment)
     full_storage_account_name = format("st%s%s", var.storage_account_name, var.environment)
@@ -55,6 +38,33 @@ resource "azurerm_virtual_network" "virtual_network" {
   subnet = {
     name = "subnet_1"
     address_prefix = "10.0.1.0/24"
+  }
+
+  tags = {
+    environment = var.environment
+  }
+}
+
+resource "azurerm_public_ip" "public_ip" {
+  name                = "PublicIPForLB"
+  location            = azurerm_resource_group.resource_group.location
+  resource_group_name = azurerm_resource_group.resource_group.name
+  allocation_method   = "Static"
+  sku = "Standard"
+
+  tags = {
+    environment = var.environment
+  }
+}
+
+resource "azurerm_lb" "lb" {
+  name                = "LoadBalancer"
+  location            = azurerm_resource_group.resource_group.location
+  resource_group_name = azurerm_resource_group.resource_group.name
+
+  frontend_ip_configuration {
+    name                 = "PublicIPAddress"
+    public_ip_address_id = azurerm_public_ip.public_ip.id
   }
 
   tags = {
