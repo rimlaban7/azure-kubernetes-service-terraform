@@ -34,7 +34,7 @@ We'll need to create an Entra application and service principal that has the app
 
 The GitHub Actions and Terraform code we will use for this project require an environment as well as repository secrets to be configured. For step-by-step instructions on how to create an environment, see [Creating an Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#creating-an-environment). For this project we'll use a Trunk-Based branching strategy. This is a good branching strategy for individual work or small teams.  For more inforomation, see [Branching Strategies](https://www.theroadtocloud.com/blog/branching-strategies/). Map this environment to a branch.  For Trunk-Based branching strategy, this is usually `main`. We'll need to call this environment the same as in the above OIDC configuration. Finally, add the below repository secrets.
 
-| Secret | Description |
+| Secret | Value |
 |-|-|
 | AZURE_TENANT_ID | Entra Tenant ID |
 | AZURE_SUBSCRIPTION_ID | Subscription ID for Azure |
@@ -52,3 +52,15 @@ Once OIDC is configured in Entra and Azure, and these repository secrets above a
 ### Initialize Terraform Remote State Storage
 
 When you execute `terraform init`, you're setting up the providers and linking to any existing state of the infrastructure. For this project, the backend state is kept in an Azure storage account.  You only need to run the GitHub Action Workflow `Initialize Remote Backend` once, and it will initialize an Azure storage account for Terraform remote state. Details for this workflow can be seen in `init-remote-backedn.yml`. As you can see, this uses Azure CLI commands. Make sure to provide the proper environment name, default is `prod`, which is mapped to the `main` branch. In the next step, we'll import infrastructure initialized with this script into Terraform state, so Terraform can also track it.  It makes much more sense to use declerative syntax with Terraform for further provisioning, instead of Azure CLI's procedural syntax.  This will make modifying infrastructure and management much easier and simpler.
+
+## Import Resources and Deploy Infrastructure
+
+The step above initialized a resource group and storage account.  Let's go ahead and import these two resources into Terraform.  First, go ahead and grab the Resource IDs for both of these and configure them in two additional repository secrets listed below.  You can grab resource ID values for these with `az group list` and `az storage account list`.
+
+| Secret | Value |
+|-|-|
+| RESOURCE_GROUP_IMPORT_ID | `Resource Group Resource ID` |
+| STORAGE_ACCOUNT_IMPORT_ID | `Storage Account Resource ID |
+
+Next, run the GitHub Action Workflow `Deploy Infrastructure` that is defined within `deploy-infra.yml`.  This will import the two resources above as well as deploy the rest of the infrastructure.
+
