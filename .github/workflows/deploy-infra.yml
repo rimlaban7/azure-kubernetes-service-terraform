@@ -19,7 +19,7 @@ env:
   TF_VAR_resource_group_name: ${{ secrets.RESOURCE_GROUP_NAME }}
   TF_VAR_environment: ${{ inputs.current_environment }}
   TF_VAR_location: ${{ secrets.LOCATION }}
-  TF_VAR_resource_group_import_id: secrets.RESOURCE_GROUP_IMPORT_ID
+  TF_VAR_resource_group_import_id: ${{ secrets.RESOURCE_GROUP_IMPORT_ID }}
   TF_VAR_storage_account_name: ${{ secrets.STORAGE_ACCOUNT_NAME }}
   TF_VAR_account_tier: ${{ secrets.ACCOUNT_TIER }}
   TF_VAR_account_replication_type: ${{ secrets.ACCOUNT_REPLICATION_TYPE }}
