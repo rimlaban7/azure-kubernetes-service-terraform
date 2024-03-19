@@ -60,7 +60,7 @@ The step above initialized a resource group and storage account.  Let's go ahead
 | Secret | Value |
 |-|-|
 | RESOURCE_GROUP_IMPORT_ID | `Resource Group Resource ID` |
-| STORAGE_ACCOUNT_IMPORT_ID | `Storage Account Resource ID |
+| STORAGE_ACCOUNT_IMPORT_ID | `Storage Account Resource ID` |
 
 Next, run the GitHub Action Workflow `Deploy Infrastructure` that is defined within `deploy-infra.yml`.  This will import the two resources above as well as deploy the rest of the infrastructure.
 
