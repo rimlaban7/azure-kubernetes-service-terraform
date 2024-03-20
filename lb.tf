@@ -1,23 +1,3 @@
-locals {
-    full_virtual_network_name = format("vnet-%s-%s", var.virtual_network_name, var.environment)
-}
-
-resource "azurerm_virtual_network" "virtual_network" {
-  name                = local.full_virtual_network_name
-  location            = azurerm_resource_group.resource_group.location
-  resource_group_name = azurerm_resource_group.resource_group.name
-  address_space       = ["10.0.0.0/20"]
-
-  subnet = {
-    name = "subnet_1"
-    address_prefix = "10.0.1.0/24"
-  }
-
-  tags = {
-    environment = var.environment
-  }
-}
-
 resource "azurerm_public_ip" "public_ip" {
   name                = "PublicIPForLB"
   location            = azurerm_resource_group.resource_group.location
@@ -48,4 +28,15 @@ resource "azurerm_lb" "lb" {
 resource "azurerm_lb_backend_address_pool" "lb_backend_address_pool" {
     name = "LoadBalancerBackendAddressPool"
     loadbalancer_id = azurerm_lb.lb.id   
+}
+
+resource "azurerm_lb_nat_pool" "lb_nat_pool" {
+    resource_group_name            = azurerm_resource_group.resource_group.name
+    loadbalancer_id                = azurerm_lb.lb.id
+    name                           = "ssh"
+    protocol                       = "Tcp"
+    frontend_port_start            = 50000
+    frontend_port_end              = 50119
+    backend_port                   = 22
+    frontend_ip_configuration_name = "PublicIPAddress"
 }
