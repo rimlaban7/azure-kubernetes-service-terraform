@@ -44,7 +44,6 @@ The GitHub Actions and Terraform code we will use for this project require an en
 | LOCATION | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
 | BLOB_CONTAINER_NAME | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
 | RESOURCE_GROUP_NAME | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
-| STORAGE_ACCOUNT_PREFIX | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
 
 Once OIDC is configured in Entra and Azure, and these repository secrets above are added to GitHub environment secrets, you can run `test-oidc.yml` to validate whether or not your GitHub Actions Workflow can connect to Azure.
 

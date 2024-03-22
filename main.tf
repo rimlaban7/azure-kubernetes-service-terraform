@@ -1,5 +1,5 @@
 locals {
-  full_resource_group_name  = format("rg-%s-%s", var.resource_group_name, var.environment)
+  full_resource_group_name = format("rg-%s-%s", var.resource_group_name, var.environment)
 }
 
 resource "random_pet" "azurerm_kubernetes_cluster_name" {
