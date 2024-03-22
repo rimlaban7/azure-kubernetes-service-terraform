@@ -15,18 +15,13 @@ variable "environment" {
 
 variable "resource_group_name" {
   type = string
-  //sensitive = true
+  sensitive = true
 }
 
 variable "location" {
   type      = string
   sensitive = true
 }
-
-//variable "storage_account_name" {
-  //type = string
-  //sensitive = true
-//}
 
 variable "account_tier" {
   type      = string
