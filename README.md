@@ -1,14 +1,13 @@
-
-![image](/aks-terraform-oidc.svg)
-
-# Deploy AKS using Terraform
-This repo contains all necessary code to stand up an AKS cluster using Terraform.  A remote backend is configured using Azure CLI.  This repo also follows [Microsoft's Cloud Adoption Framework Naming Convention](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming).
-
 # TL;DR
 1. Configure OIDC
 2. Configure Repository Secrets
 3. Run `Initialize Remote Backend` that is defined within `init-remote-backedn.yml`
 4. Run `Deploy Infrastructure` that is defined within `deploy-infra.yml`
+
+![image](/aks-terraform-oidc.svg)
+
+# Deploy AKS using Terraform
+This repo contains all necessary code to stand up an AKS cluster using Terraform.  A remote backend is configured using Azure CLI. 
 
 ## Overview
 
