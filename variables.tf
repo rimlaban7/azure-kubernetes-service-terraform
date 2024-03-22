@@ -23,10 +23,10 @@ variable "location" {
   sensitive = true
 }
 
-variable "storage_account_name" {
-  type = string
+//variable "storage_account_name" {
+  //type = string
   //sensitive = true
-}
+//}
 
 variable "account_tier" {
   type      = string
