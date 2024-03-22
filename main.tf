@@ -37,7 +37,7 @@ resource "azurerm_storage_account" "storage_account" {
 }
 
 resource "azurerm_kubernetes_cluster" "kubernetes_cluster" {
-  location            = azurerm_resource_group.rg.location
+  location            = azurerm_resource_group.resource_group.location
   name                = random_pet.azurerm_kubernetes_cluster_name.id
   resource_group_name = azurerm_resource_group.resource_group.name
   dns_prefix          = random_pet.azurerm_kubernetes_cluster_dns_prefix.id
