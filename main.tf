@@ -3,6 +3,14 @@ locals {
     full_storage_account_name = format("st%s%s", var.storage_account_name, var.environment)
 }
 
+resource "random_pet" "azurerm_kubernetes_cluster_name" {
+  prefix = "cluster"
+}
+
+resource "random_pet" "azurerm_kubernetes_cluster_dns_prefix" {
+  prefix = "dns"
+}
+
 resource "azurerm_resource_group" "resource_group" {
   name     = local.full_resource_group_name
   location = var.location
