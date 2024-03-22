@@ -50,6 +50,7 @@ The GitHub Actions and Terraform code we will use for this project require an en
 | ACCOUNT_REPLICATION_TYPE | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
 | ACCOUNT_TIER | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
 | LOCATION | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) |
+| STORAGE_ACCOUNT_NAME | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account). This will be suffixed with environment name. |
 | BLOB_CONTAINER_NAME | [Storage Account Config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account). This will be suffixed with environment name. |
 | RESOURCE_GROUP_NAME | Resource Group Name.  Will be prefixed with "rg" and suffixed with environment name. |
 
