@@ -1,7 +1,7 @@
 # TL;DR
 
 ## Project Goal
-1. Demonstrate using OIDC for Microsoft Entra and GitHub Actions authentication
+1. Demonstrate use of OIDC for Microsoft Entra and GitHub Actions authentication
 2. Demonstrate use of Azure Storage Account as Terraform Backend for state storage
 3. Demonstrate minimum viable product (MVP) Azure Kubernetes Service (AKS) deployment 
 
