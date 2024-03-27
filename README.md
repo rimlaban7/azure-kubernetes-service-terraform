@@ -1,4 +1,11 @@
 # TL;DR
+
+## Project Goal
+1. Demonstrate using OIDC for Microsoft Entra and GitHub Actions authentication
+2. Demonstrate use of Azure Storage Account as Terraform Backend for state storage
+3. Demonstrate minimum viable product (MVP) Azure Kubernetes Service (AKS) deployment 
+
+## Configuration
 1. Configure OIDC
 2. Configure Repository Secrets
 3. Run `Initialize Remote Backend` that is defined within `init-remote-backedn.yml`
