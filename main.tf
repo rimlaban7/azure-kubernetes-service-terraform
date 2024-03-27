@@ -20,7 +20,7 @@ resource "azurerm_resource_group" "resource_group" {
 }
 
 resource "azurerm_storage_account" "storage_account" {
-  name                             = "stakstfstateprod"
+  name                             = "stakstfstateprod" 
   resource_group_name              = azurerm_resource_group.resource_group.name
   location                         = azurerm_resource_group.resource_group.location
   account_tier                     = var.account_tier
