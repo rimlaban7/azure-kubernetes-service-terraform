@@ -8,7 +8,7 @@
 ## Configuration
 1. Configure OIDC
 2. Configure Repository Secrets
-3. Run `Initialize Remote Backend` that is defined within `init-remote-backedn.yml`
+3. Run `Initialize Remote Backend` that is defined within `init-remote-backend.yml`
 4. Run `Deploy Infrastructure` that is defined within `deploy-infra.yml`
 
 ![image](/aks-terraform-oidc.svg)
